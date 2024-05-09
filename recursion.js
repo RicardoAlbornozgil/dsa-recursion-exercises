@@ -10,14 +10,24 @@ function product(nums) {
 
 /** longest: return the length of the longest word in an array of words. */
 
-function longest(words) {
-  // Base case: if the array is empty, return 1 (identify element for multiplication).
-  if (nums.length === 0) return 1;
+function longest(arr, maxLength = 0) {
+  // Base case: if the array is empty, return the maxLength
+  if (arr.length === 0) {
+    return maxLength;
+  }
 
-  // Recursive call: multiply the first element with the product of the rest of the array
-  // The recursive call passes a new array containing all elements except the first one
-  return nums[0] * product(nums.slice(1));
+  // Get the length of the first word in the array
+  const length = arr[0].length;
+
+  // If the length of the word is greater than maxLength, update maxLength
+  if (length > maxLength) {
+    maxLength = length;
+  }
+
+  // Recursive case: call longest function with the rest of the array and the updated maxLength
+  return longest(arr.slice(1), maxLength);
 }
+
 
 /** everyOther: return a string with every other letter. */
 
@@ -49,7 +59,7 @@ function isPalindrome(str) {
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
+function findIndex(arr, val, index = 0) {
   // Base case: if index is greater than or equal to the array length, val is not present
   if (index >= arr.length) {
     return -1;
